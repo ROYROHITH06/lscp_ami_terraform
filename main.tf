@@ -76,7 +76,7 @@ resource "aws_instance" "my_instance" {
     host        = self.public_ip
   }
 
-   provisioner "local-exec" {
+   provisioner "remote-exec" {
      inline = [
        "chmod +x /tmp/maven.sh",
        "chmod +x /tmp/gradle.sh",
