@@ -79,7 +79,7 @@ resource "aws_instance" "my_instance" {
    provisioner "local-exec" {
      inline = [
        "chmod +x /tmp/maven.sh",
-       "chmod +x /tmp/gradle.sh"
+       "chmod +x /tmp/gradle.sh",
        "/tmp/maven.sh",
        "/tmp/gradle.sh",
      ]
