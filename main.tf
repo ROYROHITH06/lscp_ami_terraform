@@ -45,9 +45,12 @@ resource "aws_instance" "my_instance" {
                    wget https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz -P /tmp
                    sudo tar xf /tmp/apache-maven-*.tar.gz -C /opt
                    sudo ln -s /opt/apache-maven-3.8.6 /opt/maven
+                   export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+                   export PATH=$PATH:/opt/apache-maven-3.8.6/bin
                    wget -c https://services.gradle.org/distributions/gradle-7.5-bin.zip -P /tmp
                    sudo apt -y install unzip
                    sudo unzip -d /opt/gradle /tmp/gradle-7.5-bin.zip
+                   export PATH=$PATH:/opt/gradle/gradle-7.5/bin
                    sudo apt-get -y update
                    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
                    curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
@@ -60,30 +63,7 @@ resource "aws_instance" "my_instance" {
                    eksctl version
                    EOF
 
-  provisioner "file" {
-    source      = "maven.sh"
-    destination = "/tmp/maven.sh"
-  }
-  provisioner "file" {
-    source      = "gradle.sh"
-    destination = "/tmp/gradle.sh"
-  }
 
-  connection {
-    type        = "ssh"
-    user        = "ubuntu"
-    private_key = file("newpemkey.pem")
-    host        = self.public_ip
-  }
-
-   provisioner "remote-exec" {
-     inline = [
-       "chmod +x /tmp/maven.sh",
-       "chmod +x /tmp/gradle.sh",
-       "/tmp/maven.sh",
-       "/tmp/gradle.sh",
-     ]
-   }
   tags  = {
     Name  = "AMI-IMAGE-INSTANCE"
   }
