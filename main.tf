@@ -23,7 +23,6 @@ resource "aws_route_table_association" "my_vpc_ap_east_1a_public" {
 }
 
 resource "aws_instance" "my_instance" {
-  count          = 1
   ami            = var.ami
   instance_type  = var.instance_type
   key_name       = var.key_name
