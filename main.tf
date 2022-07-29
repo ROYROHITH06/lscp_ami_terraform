@@ -76,6 +76,6 @@ resource "aws_ami_from_instance" "example" {
   
 }
 
-output "test_policy_arn" {
+output "ami_id" {
   value = aws_ami_from_instance.example.id
 }
