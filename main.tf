@@ -71,6 +71,9 @@ resource "aws_instance" "my_instance" {
 resource "aws_ami_from_instance" "example" {
   name               = "ami-lscp-env-terraform"
   source_instance_id = aws_instance.my_instance.id
+  
+  depends_on = [aws_instance.my_instance]
+  
 }
 
 output "test_policy_arn" {
