@@ -45,11 +45,9 @@ resource "aws_instance" "my_instance" {
                    sudo tar xf /tmp/apache-maven-*.tar.gz -C /opt
                    sudo ln -s /opt/apache-maven-3.8.6 /opt/maven
                    export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-                   export PATH=$PATH:/opt/apache-maven-3.8.6/bin
                    wget -c https://services.gradle.org/distributions/gradle-7.5-bin.zip -P /tmp
                    sudo apt -y install unzip
                    sudo unzip -d /opt/gradle /tmp/gradle-7.5-bin.zip
-                   export PATH=$PATH:/opt/gradle/gradle-7.5/bin
                    sudo apt-get -y update
                    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
                    curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
